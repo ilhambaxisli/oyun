@@ -1,0 +1,5 @@
+{
+  "name": "Telegram Quote Bot Auto-Sender",
+  "description": "An automated bot controller that generates meaningful quotes using Gemini and sends them to a Telegram channel or chat every 10 minutes.",
+  "requestFramePermissions": []
+}
