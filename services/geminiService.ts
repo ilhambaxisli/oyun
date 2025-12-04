@@ -41,10 +41,9 @@ export const generateQuote = async (apiKey: string): Promise<string> => {
     const ai = new GoogleGenAI({ apiKey });
     const model = 'gemini-2.5-flash';
     
-    const prompt = `Türkçe, dünya klasikleri, felsefe veya modern edebiyattan derinlikli ve düşündürücü SADECE TEK BİR TANE kitap alıntısı yaz.
-Birden fazla söz veya liste ASLA oluşturma. Her seferinde sadece bir adet alıntı döndür.
+    const prompt = `Türkçe, dünya klasikleri, modern edebiyat, şiir veya felsefeden rastgele bir konuda SADECE TEK BİR TANE kitap alıntısı veya ünlü sözü yaz.
 
-Sıradan sözler yerine, edebi değeri yüksek, hayatı ve insanı sorgulatan kitap cümlelerini tercih et.
+Sürekli 'insan' veya 'hayat' kelimesi geçen sözleri SEÇME. Konu yelpazesini geniş tut: Doğa, aşk, zaman, melankoli, sanat, bilim, cesaret, korku, umut, geçmiş, gelecek, dostluk, yalnızlık gibi farklı temalardan tamamen rastgele seç. Çeşitlilik çok önemli, hep aynı kelimeleri kullanma.
 
 Format kesinlikle şu şekilde olsun (Alıntı ile kaynak arasında MUTLAKA bir boş satır bırak):
 
@@ -53,18 +52,17 @@ Format kesinlikle şu şekilde olsun (Alıntı ile kaynak arasında MUTLAKA bir 
 📖 Kitap Adı, Yazar
 
 Örnek çıktı:
-"Gerçek özgürlük, kişinin istediği her şeyi yapabilmesi değil, istemediği hiçbir şeyi yapmak zorunda kalmamasıdır."
+"Bütün mutlu aileler birbirine benzer, her mutsuz ailenin ise kendine özgü bir mutsuzluğu vardır."
 
-📖 Emile ya da Eğitim Üzerine, Jean-Jacques Rousseau
+📖 Anna Karenina, Lev Tolstoy
 
-Önceliği her zaman kitap alıntılarına ver.
 Başka açıklama, giriş metni veya numara yazma, sadece yukarıdaki formatta tek bir söz döndür.`;
 
     const response = await ai.models.generateContent({
       model: model,
       contents: prompt,
       config: {
-        temperature: 0.9,
+        temperature: 1.2, // Yaratıcılığı ve rastgeleliği artırmak için yüksek temperature
         maxOutputTokens: 1000,
         thinkingConfig: { thinkingBudget: 0 },
         safetySettings: [
